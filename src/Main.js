@@ -38,30 +38,6 @@ module.exports = React.createClass({
     AsyncStorage.setItem('completedTasks', JSON.stringify(this.state.completedTasks));
   },
 
-  addTask() {
-    const tasks = this.state.tasks.concat([this.state.task]);
-    this.setState({ tasks });
-  },
-
-  completeTask(index) {
-    let tasks = this.state.tasks;
-    tasks = tasks.slice(0, index).concat(tasks.slice(index + 1));
-
-    let completedTasks = this.state.completedTasks;
-    completedTasks = completedTasks.concat([this.state.tasks[index]]);
-
-    this.setState({
-      tasks,
-      completedTasks
-    });
-  },
-
-  deleteTask(index) {
-    let completedTasks = this.state.completedTasks;
-    completedTasks = completedTasks.slice(0, index).concat(completedTasks.slice(index + 1));
-    this.setState({ completedTasks });
-  },
-
   renderList(tasks) {
     // Return individual Views or rows based on the argued tasks
     return (
@@ -103,6 +79,30 @@ module.exports = React.createClass({
         );
       })
     );
+  },
+
+  deleteTask(index) {
+    let completedTasks = this.state.completedTasks;
+    completedTasks = completedTasks.slice(0, index).concat(completedTasks.slice(index + 1));
+    this.setState({ completedTasks });
+  },
+
+  completeTask(index) {
+    let tasks = this.state.tasks;
+    tasks = tasks.slice(0, index).concat(tasks.slice(index + 1));
+
+    let completedTasks = this.state.completedTasks;
+    completedTasks = completedTasks.concat([this.state.tasks[index]]);
+
+    this.setState({
+      tasks,
+      completedTasks
+    });
+  },
+
+  addTask() {
+    let tasks = this.state.tasks.concat([this.state.task]);
+    this.setState({ tasks });
   },
 
   render() {
